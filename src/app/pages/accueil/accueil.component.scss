@@ -1,0 +1,15 @@
+mat-card.promotion {
+    background-color: #e0cdb6;
+
+    mat-card-subtitle {
+        .prix {
+            text-decoration: line-through;
+        }
+
+        .prix-promo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4d9653;
+        }
+    }
+}

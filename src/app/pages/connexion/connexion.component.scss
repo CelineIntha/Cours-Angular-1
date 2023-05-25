@@ -1,0 +1,26 @@
+h1 {
+    color:rgb(208, 145, 68);
+    }
+    form {
+        display: flex;
+        flex-direction : column;
+        margin-left: 560px;
+        margin-top: 100px;
+    
+        mat-form-field {
+            max-width: 500px;
+            min-width: 300px;
+            width: 100%;
+        }
+    
+        .action-buttons {
+            display: flex;
+            margin-left: 20px;
+        }
+        
+        button, a {
+            width: 220px;
+            margin-left: 5px;
+        }
+    
+    }

@@ -1,0 +1,30 @@
+h1 {
+position: relative;
+top: 150px;
+left: 360px;
+font-weight: bold;
+color: #3f51b5;
+}
+form {
+    display: flex;
+    flex-direction : column;
+    margin-left: 360px;
+    margin-top: 200px;
+
+    mat-form-field {
+        max-width: 500px;
+        min-width: 300px;
+        width: 100%;
+    }
+
+    .action-buttons {
+        display: flex;
+        margin-left: 20px;
+    }
+    
+    button, a {
+        width: 200px;
+        margin-right: 4em;
+    }
+
+}

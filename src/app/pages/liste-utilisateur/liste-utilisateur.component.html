@@ -1,0 +1,7 @@
+<h1 (click)="traitement()">Liste des utilisateurs</h1>
+{{maintenant | date : 'dd/M/yy'}}
+<ul>
+    <li *ngFor="let utilisateur of listeUtilisateur">
+        {{ utilisateur.name | majuscule }}
+    </li>
+</ul>

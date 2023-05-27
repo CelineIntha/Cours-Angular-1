@@ -20,6 +20,7 @@ import { ListeUtilisateurComponent } from './pages/liste-utilisateur/liste-utili
 import { HttpClientModule } from '@angular/common/http';
 import { MajusculePipe } from './pipes/majuscule.pipe';
 import { ConnexionComponent } from './pages/connexion/connexion.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConnexionComponent } from './pages/connexion/connexion.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

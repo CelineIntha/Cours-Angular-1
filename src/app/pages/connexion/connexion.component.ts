@@ -7,33 +7,35 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 @Component({
   selector: 'app-connexion',
   templateUrl: './connexion.component.html',
-  styleUrls: ['./connexion.component.scss']
+  styleUrls: ['./connexion.component.scss'],
 })
 export class ConnexionComponent {
-  constructor(private formBuilder: FormBuilder, 
-    public auth: AuthentificationService, 
+  constructor(
+    private formBuilder: FormBuilder,
+    public auth: AuthentificationService,
     private router: Router,
-    private http: HttpClient) {
-
-   } // Injection de dépendance
+    private http: HttpClient
+  ) {}
 
   formulaire: FormGroup = this.formBuilder.group({
-    email : ["",[Validators.required, Validators.email]],
-    password: ["",[Validators.required]] // Contrainte de validation sur le formulaire
-  })
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+  });
 
   onConnexion() {
-    if(this.formulaire.valid){
+    if (this.formulaire.valid) {
+      this.http
+        .post(
+          'http://localhost:8888/Angular/BackEndAngular/connexion.php',
+          this.formulaire.value
+        )
+        .subscribe((reponse: any) => {
+          if (reponse.jwt) {
+            this.auth.connexion(reponse.jwt);
+          }
+        });
 
-      //faire une requête pour vérifier si l'utilisateur existe
-      this.http.post('http://localhost:8888/Angular/BackEndAngular/connexion.php', this.formulaire.value,)
-      .subscribe((reponse: any) => {
-        if(reponse.jwt) {
-          this.auth.connexion(reponse.jwt)
-        }
-      });
-
-      this.router.navigateByUrl('/accueil')
+      this.router.navigateByUrl('/accueil');
     }
   }
 }

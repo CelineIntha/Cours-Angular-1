@@ -1,28 +1,48 @@
 <form class="container" (ngSubmit)="onSubmit()" [formGroup]="formulaire">
   <mat-form-field appearance="fill">
     <mat-label>Nom</mat-label>
-    <input matInput formControlName="nom"/>
+    <input matInput formControlName="nom" />
     <mat-error>Le nom est obligatoire</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Contenu</mat-label>
     <textarea matInput formControlName="contenu"></textarea>
-    <mat-error *ngIf="formulaire.get('contenu')?.hasError('required')">Le contenu est obligatoire</mat-error>
-    <mat-error *ngIf="formulaire.get('contenu')?.hasError('minlength')">Minimum 10 caractères
-      Minimum 10 caractères (il  manque {{
-        formulaire.get('contenu')?.getError('minlength')?.requiredLength - 
-        formulaire.get('contenu')?.getError('minlength')?.actualLength
-      }} caractère{{
-        (formulaire.get('contenu')?.getError('minlength')?.requiredLength - 
-        formulaire.get('contenu')?.getError('minlength')?.actualLength) > 1 ? "s" : ""
-      }})
+    <mat-error *ngIf="formulaire.get('contenu')?.hasError('required')"
+      >Le contenu est obligatoire</mat-error
+    >
+    <mat-error *ngIf="formulaire.get('contenu')?.hasError('minlength')">
+      Minimum 10 caractères (il manque
+      {{
+        formulaire.get("contenu")?.getError("minlength")?.requiredLength -
+          formulaire.get("contenu")?.getError("minlength")?.actualLength
+      }}
+      caractère({{
+        formulaire.get("contenu")?.getError("minlength")?.requiredLength -
+          formulaire.get("contenu")?.getError("minlength")?.actualLength >
+        1
+          ? "s"
+          : ""
+      }}))
     </mat-error>
   </mat-form-field>
 
-  <div class="action-buttons">
-      <button type="submit" mat-raised-button color="primary">Ajouter l'article</button>
-      <a routerLink="/" mat-raised-button color="warn">Annuler</a>
-  </div>
+  <mat-form-field>
+    <mat-label>Catégorie</mat-label>
+    <mat-select formControlName="id_categorie">
+      <mat-option
+        *ngFor="let categorie of listeCategorie"
+        [value]="categorie.id"
+      >
+        {{ categorie.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
+  <div class="action-buttons">
+    <button type="submit" mat-raised-button color="primary">
+      Ajouter l'article
+    </button>
+    <a routerLink="/" mat-raised-button color="warn">Annuler</a>
+  </div>
 </form>

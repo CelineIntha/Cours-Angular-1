@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit-produit.component.scss'],
 })
 export class EditProduitComponent {
-
   idArticle = null;
+  listeCategorie: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,8 +18,13 @@ export class EditProduitComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.route.params.subscribe((parametres) => {
+    this.http
+      .get('http://localhost:8888/Angular/BackEndAngular/liste-categories.php')
+      .subscribe(
+        (listeCategorie: any) => (this.listeCategorie = listeCategorie)
+      );
 
+    this.route.params.subscribe((parametres) => {
       this.idArticle = parametres['id'];
 
       if (parametres['id']) {
@@ -36,6 +41,7 @@ export class EditProduitComponent {
   formulaire: FormGroup = this.formBuilder.group({
     nom: ['', [Validators.required]],
     contenu: ['', [Validators.required, Validators.minLength(10)]],
+    id_categorie: [null, []],
   });
 
   onSubmit() {
@@ -47,9 +53,9 @@ export class EditProduitComponent {
       if (jwt != null) {
         this.http
           .post(
-            'http://localhost:8888/Angular/BackEndAngular/' 
-              + (this.idArticle == null ? 'ajout-article' : 'modifier-article') 
-              + '.php',
+            'http://localhost:8888/Angular/BackEndAngular/' +
+              (this.idArticle == null ? 'ajout-article' : 'modifier-article') +
+              '.php',
             article,
             { headers: { Authorization: jwt } }
           )
